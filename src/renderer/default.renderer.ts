@@ -150,7 +150,7 @@ export class DefaultRenderer implements ListrRenderer {
   private id?: NodeJS.Timeout
   private bottomBar: { [uuid: string]: { data?: string[], items?: number } } = {}
   private promptBar: string
-  private spinner: string[] = process.platform === 'win32' && !process.env.WT_SESSION ? [ '-', '\\', '|', '/' ] : [ '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' ]
+  private spinner: string[] = process.platform === 'win32' && !process.env.WT_SESSION ? [ '-', '\\', '|', '/' ] : ['⣷', '⣯', '⣟', '⡿', '⢿', '⣻', '⣽', '⣾']
   private spinnerPosition = 0
 
   constructor (public tasks: Task<any, typeof DefaultRenderer>[], public options: typeof DefaultRenderer['rendererOptions'], public renderHook$?: Task<any, any>['renderHook$']) {

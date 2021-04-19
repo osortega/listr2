@@ -1,7 +1,6 @@
 import pMap from 'p-map'
 import { Subject } from 'rxjs'
 
-import { ListrTaskState } from '@constants/state.constants'
 import { ListrError } from '@interfaces/listr-error.interface'
 import { ListrBaseClassOptions, ListrContext, ListrTask } from '@interfaces/listr.interface'
 import {
@@ -27,7 +26,7 @@ export class Listr<Ctx = ListrContext, Renderer extends ListrRendererValue = Lis
   public rendererClassOptions: ListrGetRendererOptions<ListrRendererFactory>
   public renderHook$: Task<any, any>['renderHook$'] = new Subject()
   private concurrency: number
-  private renderer: ListrRenderer
+  public renderer: ListrRenderer
 
   constructor (
     public task: ListrTask<Ctx, ListrGetRendererClassFromValue<Renderer>> | ListrTask<Ctx, ListrGetRendererClassFromValue<Renderer>>[],
@@ -72,17 +71,17 @@ export class Listr<Ctx = ListrContext, Renderer extends ListrRendererValue = Lis
     // Graceful interrupt for render cleanup
     /* istanbul ignore if */
     if (this.options.registerSignalListeners) {
-      process
-        .once('SIGINT', () => {
-          this.tasks.forEach(async (task) => {
-            if (task.isPending()) {
-              task.state$ = ListrTaskState.FAILED
-            }
-          })
-          this.renderer.end(new Error('Interrupted.'))
-          process.exit(127)
-        })
-        .setMaxListeners(0)
+      // process
+      //   .once('SIGINT', () => {
+          // this.tasks.forEach(async (task) => {
+          //   if (task.isPending()) {
+          //     task.state$ = ListrTaskState.FAILED
+          //   }
+          // })
+          // this.renderer.end(new Error('Interrupted.'))
+          // process.exit(127)
+        // })
+        // .setMaxListeners(0)
     }
 
     // disable color programatically for CI purposes
