@@ -1,6 +1,6 @@
 {
   "name": "listr-cs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Terminal task list reborn! Create beautiful CLI interfaces via easy and logical to implement task lists that feel alive and interactive.",
   "license": "MIT",
   "main": "./dist/index.js",
