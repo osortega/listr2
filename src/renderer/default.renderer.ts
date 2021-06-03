@@ -502,9 +502,7 @@ export class DefaultRenderer implements ListrRenderer {
   // eslint-disable-next-line complexity
   private getSymbol (task: Task<ListrContext, typeof DefaultRenderer>, data = false): string {
     if (task.isPending() && !data) {
-      return this.options?.lazy || this.getSelfOrParentOption(task, 'showSubtasks') !== false && task.hasSubtasks() && !task.subtasks.every((subtask) => !subtask.hasTitle())
-        ? chalk.yellow(figures.main.pointer)
-        : chalk.yellowBright(this.spinner[this.spinnerPosition])
+      return chalk.yellowBright(this.spinner[this.spinnerPosition]);
     } else if (task.isCompleted() && !data) {
       if (task.hasSubtasks() && task.subtasks.some((subtask) => subtask.hasFailed())) {
         return chalk.yellow(figures.main.warning)

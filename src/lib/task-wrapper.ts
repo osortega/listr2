@@ -117,6 +117,10 @@ export class TaskWrapper<Ctx, Renderer extends ListrRendererFactory> {
     }) as unknown) as NodeJS.WriteStream
   }
 
+  public attachNewChildren(list: Listr<Ctx, any, any>) {
+    this.task.attachNewChildren(list); 
+  }
+
   /** Run this task. */
   public run (ctx: Ctx): Promise<void> {
     return this.task.run(ctx, this)

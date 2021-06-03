@@ -208,6 +208,18 @@ export class Task<Ctx, Renderer extends ListrRendererFactory> extends Subject<Li
     }
   }
 
+  public attachNewChildren(list: Listr<Ctx, any, any>) {
+    const rendererClass = getRenderer('silent')
+        list.rendererClass = rendererClass.renderer
+        list.renderHook$.subscribe((): void => {
+          this.renderHook$.next()
+        })
+        // assign subtasks
+        this.subtasks = list.tasks
+        this.next({ type: ListrEventType.SUBTASK })
+        list.run()
+  }
+
   /** Run the current task. */
   async run (context: Ctx, wrapper: TaskWrapper<Ctx, Renderer>): Promise<void> {
     const handleResult = (result: any): Promise<any> => {
